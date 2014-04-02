@@ -14,7 +14,8 @@
 	<channel id="replyChannel" />
 	<channel id="requestChannel" />
 	
-
+	<jms:message-driven-channel-adapter
+		channel="requestChannel" destination-name="request.queue" />
 
 	<beans:bean id="connectionFactory"
 		class="org.apache.activemq.ActiveMQConnectionFactory">
