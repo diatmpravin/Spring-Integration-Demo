@@ -13,9 +13,17 @@
 
 	<channel id="replyChannel" />
 	<channel id="requestChannel" />
+	<channel id="null-channel" />
 	
 	<jms:message-driven-channel-adapter
 		channel="requestChannel" destination-name="request.queue" />
+		
+	<service-activator input-channel="requestChannel"
+		output-channel="null-channel" ref="testHandler" method="handleMessage">
+	</service-activator>	
+	
+	<beans:bean id="testHandler" class="demo.TestHandler">
+	</beans:bean>
 
 	<beans:bean id="connectionFactory"
 		class="org.apache.activemq.ActiveMQConnectionFactory">
