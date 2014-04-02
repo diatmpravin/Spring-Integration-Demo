@@ -19,8 +19,11 @@
 		channel="requestChannel" destination-name="request.queue" />
 		
 	<service-activator input-channel="requestChannel"
-		output-channel="null-channel" ref="testHandler" method="handleMessage">
+		output-channel="replyChannel" ref="testHandler" method="handleMessage">
 	</service-activator>	
+	
+	<jms:outbound-channel-adapter channel="replyChannel"
+		destination-name="response.queues" />
 	
 	<beans:bean id="testHandler" class="demo.TestHandler">
 	</beans:bean>
